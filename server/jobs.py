@@ -12,20 +12,20 @@ from time import time
 
 job_list = [
     {
+        'id': 'monitors.running.%s' % str(time()),
+        'function': 'init:flask_app.logger.info',
+        'kwargs': { 'msg': 'Monitors are running...' },
+        'interval': 60
+    },
+    {
+        'id': 'monitors.started.%s' % str(time()),
+        'function': 'init:flask_app.logger.debug',
+        'kwargs': { 'msg': 'Monitors are started.' }
+    },
+    {
         'id': 'telegram.monitor.%s' % str(time()),
         'function': 'telegram:monitor_telegram',
         'kwargs': { 'telegram_config': telegram_config },
         'interval': 2
-    },
-    {
-        'id': 'monitors.running.%s' % str(time()),
-        'function': 'init:app.logger.debug',
-        'kwargs': { 'msg': 'Monitors are running...' },
-        'interval': 60 * 2
-    },
-    {
-        'id': 'monitors.started.%s' % str(time()),
-        'function': 'init:app.logger.debug',
-        'kwargs': { 'msg': 'Monitors are started.' }
     }
 ]
